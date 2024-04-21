@@ -1,0 +1,36 @@
+---
+interface Props {
+  feature: {
+    title: string;
+    description: string;
+    icon: string;
+  };
+}
+
+const {
+  feature: { title, description, icon },
+} = Astro.props;
+---
+
+<div class="jos" data-jos_animation="fade-left" data-jos_delay="0">
+  <!-- <div
+    class="mb-7 h-[66px] w-[66px] overflow-hidden rounded-[50%] border-2 border-black"
+  >
+    <img
+      src="assets/img/th-13/testimonial-user-1.png"
+      alt="testimonial-user-1"
+      width="66"
+      height="66"
+      class="h-full w-full object-cover"
+    />
+  </div> -->
+  <h2 class="block text-2xl mb-6 font-semibold text-black">
+    {title}
+  </h2>
+
+  <blockquote class="mb-4 text-xl text-black lg:text-2xl">
+    {description}
+  </blockquote>
+</div>
+
+<style></style>
