@@ -5,7 +5,8 @@ interface Props {
   features?: {
     title: string;
     description: string;
-    icon: string;
+    color: string;
+    count: number;
   }[];
 }
 
@@ -15,19 +16,22 @@ const {
       title: "Low Code Solutions",
       description:
         "Set-up and customization of low-code platforms such as Squarespace and WordPress.",
-      icon: "web-development",
+      color: "#48C96C",
+      count: 1,
     },
     {
       title: "Headless CMS & Custom Frontend",
       description:
         "Integration of headless CMS platforms like Strpai and others with custom frontend development.",
-      icon: "e-commerce",
+      color: "#FC6ADC",
+      count: 2,
     },
     {
       title: "Consultation",
       description:
         "Personalized expert advice on CMS selection, architecture, and optimization; ongoing support and training.",
-      icon: "seo-marketing",
+      color: "#FFA767",
+      count: 3,
     },
   ],
 } = Astro.props;

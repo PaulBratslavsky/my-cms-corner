@@ -3,28 +3,25 @@ interface Props {
   feature: {
     title: string;
     description: string;
-    icon: string;
+    color: string;
+    count: number;
   };
 }
 
 const {
-  feature: { title, description, icon },
+  feature: { title, description, color, count },
 } = Astro.props;
 ---
 
 <div class="jos" data-jos_animation="fade-left" data-jos_delay="0">
-  <!-- <div
-    class="mb-7 h-[66px] w-[66px] overflow-hidden rounded-[50%] border-2 border-black"
-  >
-    <img
-      src="assets/img/th-13/testimonial-user-1.png"
-      alt="testimonial-user-1"
-      width="66"
-      height="66"
-      class="h-full w-full object-cover"
-    />
-  </div> -->
-  <h2 class="block text-2xl mb-6 font-semibold text-black">
+  <div class="mb-7">
+    <span
+      class={`inline-flex h-[50px] w-[50px] flex-none items-center justify-center rounded-[50%] bg-[${color}]`}
+    >
+      <span class="text-black text-2xl font-semibold">{count}</span>
+    </span>
+  </div>
+  <h2 class="block text-2xl mb-6 text-black">
     {title}
   </h2>
 
