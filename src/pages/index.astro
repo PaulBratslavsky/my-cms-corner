@@ -4,16 +4,14 @@ import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import Features from "../components/Features.astro";
-import Section from "../components/SectionLeft.astro";
-import Cta from "../components/Cta.astro";
+import SectionLeft from "../components/SectionLeft.astro";
 ---
 
 <Layout title="Welcome to Astro.">
   <main class="main-wrapper relative overflow-hidden">
     <Hero />
     <Features />
-    <Section />
-    <Cta />
+    <SectionLeft id="contact-us" />
   </main>
 </Layout>
 
