@@ -1,0 +1,120 @@
+---
+import qs from "qs";
+import { flattenAttributes, getStrapiMedia } from "../../lib/utils";
+
+import Layout from "../../layouts/Layout.astro";
+import fetchApi from "../../lib/strapi";
+
+import ButtonLink from "../../components/ButtonLink.astro";
+
+interface Article {
+  id: string;
+  title: string;
+  description: string;
+  slug: string;
+  image: {
+    url: string;
+    alternativeText: string;
+  };
+}
+
+const query = qs.stringify({
+  sort: ["title:asc"],
+  filters: {
+    tag: {
+      $eq: "my-cms-corner",
+    },
+  },
+  populate: {
+    posts: {
+      populate: {
+        image: {
+          fields: ["url", "alternativeText"],
+        },
+      },
+    },
+  },
+
+  publicationState: "live",
+  locale: ["en"],
+});
+
+const response = await fetchApi({
+  endpoint: "post-groups",
+  query: query,
+});
+
+const flattenedResponse = flattenAttributes(response);
+if (flattenedResponse.error) return Astro.redirect('/404')
+const articles = flattenedResponse?.data[0]?.posts?.data;
+console.log(articles);
+---
+
+<Layout title="Articles">
+  <!--...::: Portfolio Section Start :::... -->
+  <div class="section-portfolio">
+    <!-- Section Space -->
+    <div class="section-space">
+      <!-- Section Container -->
+      <div class="container-default">
+        <!-- Tab Button Menu -->
+        <div class="flex flex-wrap justify-center gap-3 md:gap-6">
+          <ButtonLink href="/blog" text="All" />
+          <ButtonLink href="/blog/strapi" text="Strapi" />
+        </div>
+        <!-- Tab Button Menu -->
+
+        <!-- Portfolio Area -->
+        <div class="my-10 lg:my-[60xp] xl:my-20">
+          <!-- Portfolio List -->
+          <div
+            class="tab-content grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+            id="show-all"
+          >
+            {
+              articles.map((article: Article) => {
+                const { title, slug, description, image } = article;
+                return (
+                  <div class="jos">
+                    <div class="group">
+                      <div class="hover-solid-shadow">
+                        <div class="overflow-hidden rounded-[10px] h-[250px]">
+                          <img
+                            src={getStrapiMedia(image.url)}
+                            alt="portfolio-modern-img-1"
+                            width="406"
+                            height="350"
+                            class="h-full w-full object-cover transition-all duration-300 ease-in-out group-hover:scale-105"
+                          />
+                        </div>
+                      </div>
+                      <div class="mt-8">
+                        <div class="mb-3 flex flex-wrap gap-2 text-xl leading-[1.33] -tracking-[0.5px] text-ColorBlack group-hover:text-ColorBlack lg:flex-nowrap xl:text-2xl">
+                          <a href={slug} class="hover:text-ColorBlack ">
+                            {title}
+                          </a>
+                        </div>
+                        <p class="line-clamp-2 text-base sm:max-w-[350px]">
+                          {description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            }
+          </div>
+          <!-- Portfolio List -->
+        </div>
+        <!-- Portfolio Area -->
+
+        <div class="flex justify-center">
+          <ButtonLink href="/blog" text="More" />
+        </div>
+      </div>
+      <!-- Section Container -->
+    </div>
+    <!-- Section Space -->
+  </div>
+  <!--...::: Portfolio Section End :::... -->
+</Layout>
