@@ -2,14 +2,10 @@
 import qs from "qs";
 import { marked } from "marked";
 import Layout from "../../layouts/Layout.astro";
-import {
-  Breadcrumbs,
-  BreadcrumbsItem,
-  Media,
-} from "accessible-astro-components";
+import { Breadcrumbs, BreadcrumbsItem } from "accessible-astro-components";
 import { getStrapiMedia, flattenAttributes } from "../../lib/utils";
 import fetchApi from "../../lib/strapi";
-// import MarkdownLayout from "../../layouts/MarkdownLayout.astro";
+
 // import OptimizedImage from "../../components/OptimizedImage.astro";
 
 interface Article {
