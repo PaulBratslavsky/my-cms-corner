@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+
 interface Props {
   id?: string;
 }
@@ -57,7 +59,7 @@ const { id } = Astro.props;
                 <div
                   class="btn is-large is-rounded border-black bg-[#F6F9F0] text-black"
                 >
-                  Get Started Now
+                  Coming Soon
                 </div>
                 <div
                   class="is-rounded absolute inset-0 -z-10 translate-x-[5px] translate-y-[5px] border border-black bg-black transition-all duration-300 ease-linear group-hover:translate-x-0 group-hover:translate-y-0"
@@ -71,8 +73,8 @@ const { id } = Astro.props;
               <div
                 class="mx-auto lg:mx-0 max-w-full sm:max-w-[80%] md:max-w-[50%] lg:max-w-full"
               >
-                <img
-                  src="https://placehold.co/400"
+                <Image
+                  src="https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                   alt="content-img-1"
                   width="410"
                   height="410"
