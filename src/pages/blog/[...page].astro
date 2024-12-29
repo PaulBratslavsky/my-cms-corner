@@ -1,6 +1,6 @@
 ---
 import qs from "qs";
-import { flattenAttributes, getStrapiMedia } from "../../lib/utils";
+import { getStrapiMedia } from "../../lib/utils";
 import { Pagination } from "accessible-astro-components";
 
 import Layout from "../../layouts/Layout.astro";
@@ -52,15 +52,35 @@ export async function getStaticPaths({ paginate }: { paginate: (items: Article[]
     locale: ["en"],
   });
 
-  const response = await fetchApi<Article[]>({
+  interface Response {
+    data: [
+      {
+        id: number;
+        title: string;
+        description: string;
+        tag: string;
+        createdAt: string;
+        updatedAt: string;
+        publishedAt: string;
+        documentId: string;
+        posts: Article[];
+      }
+    ]
+  }
+
+  const response = await fetchApi<Response>({
     endpoint: "post-groups",
     query: query,
   });
 
 
-  const flattenedResponse = flattenAttributes(response);
-  if (flattenedResponse.error) return Astro.redirect("/404");
-  const articles = flattenedResponse?.data[0]?.posts?.data;
+  const articles = response.data[0].posts;
+
+  console.log(articles, "what is this ok");
+
+
+
+  if (articles.length === 0) throw new Error("No articles found");
   return paginate(articles, { pageSize: 9 });
 }
 

@@ -26,7 +26,7 @@ export default async function fetchApi<T>({
   const baseUrl = import.meta.env.STRAPI_URL;
   const path = `${baseUrl}/api/${endpoint}`;
   const url = new URL(path, baseUrl);
-
+  
   if (query) url.search = query;
 
   const res = await fetch(url.href);
